@@ -12,6 +12,10 @@ class UserService {
 
     return mongoUserRepository.findOrCreate(data);
   }
+
+  public findById(id: string): Promise<User | void> {
+    return mongoUserRepository.findById(id);
+  }
 }
 
 export const userService = new UserService();

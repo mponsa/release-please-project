@@ -12,8 +12,12 @@ const getUserSchema = {
   }),
 };
 
-router.get('/:id', validate(getUserSchema), (request, response) => {
-  return response.status(200).send({ ok: true });
+router.get('/:id', validate(getUserSchema), async (request, response) => {
+  const id = request.params.id;
+
+  const user = await userService.findById(id);
+
+  return response.status(200).send(user);
 });
 
 const createUserSchema = {
