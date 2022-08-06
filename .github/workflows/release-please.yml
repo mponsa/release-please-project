@@ -11,4 +11,3 @@ jobs:
         with:
           release-type: node
           package-name: ts-project-scaffolding
-          command: release-pr
