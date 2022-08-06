@@ -12,8 +12,26 @@ const getUserSchema = {
   }),
 };
 
-router.get('/:id', validate(getUserSchema), (request, response) => {
-  return response.status(200).send({ ok: true });
+router.get('/:id', validate(getUserSchema), async (request, response) => {
+  const id = request.params.id;
+
+  const user = await userService.findById(id);
+
+  return response.status(200).send(user);
+});
+
+const getUserByEmailSchema = {
+  query: s.object({
+    email: s.string(),
+  }),
+};
+
+router.get('/', validate(getUserByEmailSchema), async (request, response) => {
+  const email = request.query.email;
+
+  const user = await userService.findByEmail(email as string);
+
+  return response.status(200).send(user);
 });
 
 const createUserSchema = {
